@@ -6,7 +6,7 @@ quali dei numeri da indovinare sono stati individuati. */
 // 1.1 lo visualizzo in un alert
 // 2. al click ok dell'alert parte un timer di 30 secondi
 // 3. dopo trenta secondi appare un prompt (ciclato 5 volte) dove l'utente può inserire i numeri che ricorda
-// 4. il programma contolla quali e quanti numeri sono stati indovinati
+// 4. il programma controlla quali e quanti numeri sono stati indovinati
 
 
 // 1. Array di numeri creati dal pc
@@ -23,7 +23,7 @@ while (numeriPc.length < 5) {
 	}
 }
 
-// 2. visualizzo nell'alert l'array di num creati dal pc
+// 2. Visualizzo nell'alert l'array di num creati dal pc
 alert(numeriPc + 'Memorizza questi numeri, hai 30 secondi di tempo');
 console.log(numeriPc);
 
@@ -33,15 +33,18 @@ console.log(numeriPc);
 setTimeout(function () {
 
 	for (let i = 0; i < 5; i++) {
-		var numUtente = parseInt(prompt('Inserisci i numeri che hai visto'))
+		var numUtente = parseInt(prompt('Inserisci un numero che hai visto e premi ok'))
 
 		// 4. Ogni volta che l'utente inserisce un num viene controllato se è prensente nell'array del pc, in caso affermativo tale numero finise nell'array dei numeri giusti
 		if (checkArr(numeriPc, numUtente)) {
 			numeriGiusti.push(numUtente);
 		}
-	}
 
-	console.log('hai indovinato ' + numeriGiusti.length + ' numeri. Eccoli ' + numeriGiusti);
+
+
+	}
+	// Log a video dei numeri indovinati e di quanti sono
+	console.log('Hai indovinato ' + numeriGiusti.length + ' numeri. Eccoli ' + numeriGiusti);
 }, 5000);
 
 
