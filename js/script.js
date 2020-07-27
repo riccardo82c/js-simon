@@ -1,39 +1,64 @@
 /* Un alert espone 5 numeri casuali.
-Da li parte un timer di 30 secondi.
-Dopo 30 secondi l 'utente deve inserire un prompt alla
-volta i numeri che ha visto precedentemente.Dopo che
-sono stati inseriti i 5 numeri, il software dice quanti e
+Dopo la chiusura(manuale, cioè facendo click su ok) dell 'alert, parte un timer di 30 secondi.
+Dopo i 30 secondi l 'utente deve inserire un prompt alla volta i numeri che ha visto precedentemente. Dopo che sono stati inseriti i 5 numeri, il software dice quanti e
 quali dei numeri da indovinare sono stati individuati. */
+// 1. creo un array di num casuali
+// 1.1 lo visualizzo in un alert
+// 2. al click ok dell'alert parte un timer di 30 secondi
+// 3. dopo trenta secondi appare un prompt (ciclato 5 volte) dove l'utente può inserire i numeri che ricorda
+// 4. il programma contolla quali e quanti numeri sono stati indovinati
 
 
-
-
-/* array di numeri creati dal pc */
-var numPc = [];
+// 1. Array di numeri creati dal pc
+var numeriPc = [];
+var numeriGiusti = [];
 
 /* finchè la lunghezza dell'array non arriva a 5 */
 /* inserisco un numero nell'array dopo aver controllato che nn è presente 
 nell'array */
-while (numPc.length < 5) {
+while (numeriPc.length < 5) {
 	var numeroRnd = numRandom(1, 100);
-	if (!checkArr(numPc, numeroRnd)) {
-		numPc.push(numeroRnd);
+	if (!checkArr(numeriPc, numeroRnd)) {
+		numeriPc.push(numeroRnd);
 	}
 }
 
+// 2. visualizzo nell'alert l'array di num creati dal pc
+alert(numeriPc + 'Memorizza questi numeri, hai 30 secondi di tempo');
+console.log(numeriPc);
 
-alert(numPc + 'Memorizza questi numeri, hai 30 secondi di tempo');
 
 
+// 3. metodo setTimeout per temporizzare la comparsa del ciclo di 5 prompt
 setTimeout(function () {
-	var inserito = prompt('Inserisci un numero');
-}, 30000);
+
+	for (let i = 0; i < 5; i++) {
+		var numUtente = parseInt(prompt('Inserisci i numeri che hai visto'))
+
+		// 4. Ogni volta che l'utente inserisce un num viene controllato se è prensente nell'array del pc, in caso affermativo tale numero finise nell'array dei numeri giusti
+		if (checkArr(numeriPc, numUtente)) {
+			numeriGiusti.push(numUtente);
+		}
+	}
+
+	console.log('hai indovinato ' + numeriGiusti.length + ' numeri. Eccoli ' + numeriGiusti);
+}, 5000);
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+/* FUNZIONI */
 
 
 // funzione random
@@ -50,6 +75,3 @@ function checkArr(arr, num) {
 	}
 	return false;
 }
-
-// funzione inserisci un numero
-var inserito = prompt('Inserisci un numero');
