@@ -10,9 +10,9 @@ quali dei numeri da indovinare sono stati individuati. */
 
 
 // 1. Array di numeri creati dal pc
-var numeriPc = [];
-var numeriGiusti = [];
-var numeriUtente = [];
+var numeriPc = [],
+	numeriGiusti = [],
+	numeriUtente = [];
 
 /* Finchè la lunghezza dell'array non arriva a 5 */
 /* inserisco un numero nell'array dopo aver controllato che nn è presente 
@@ -29,10 +29,35 @@ alert(numeriPc + 'Memorizza questi numeri, hai 30 secondi di tempo');
 console.log(numeriPc);
 
 
+// 3. metodo setInterval per temporizzare la comparsa del ciclo di 5 prompt
+let clock = setInterval(countdown, 1000);
+var i = 30;
 
-// 3. metodo setTimeout per temporizzare la comparsa del ciclo di 5 prompt
-setTimeout(function () {
+function countdown() {
+	console.log(i--);
+	if (i < 0) {
+		clearInterval(clock);
+		inserimento();
+	}
+}
 
+/* FUNZIONI */
+// funzione random
+function numRandom(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// funzione check se un N è presente in un array (true = presente)
+function checkArr(arr, num) {
+	for (let i = 0; i < arr.length; i++) {
+		if (num == arr[i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function inserimento() {
 	// utilizzo un while invece che un for che mi permette di verificare che l'utente nn inserisca più volte lo stesso numero... il contatore è numeriUtente.length < 5 così da incrementarsi ogniqualvolta l'utente mette un numero non ancora messo (a prescinde dal fatto che sia o meno presente in quelli definiti random dal pc)
 	while (numeriUtente.length < 5) {
 		var numeroUtente = parseInt(prompt('Inserisci un numero che hai visto e premi ok'));
@@ -49,39 +74,4 @@ setTimeout(function () {
 	}
 	// Log a video dei numeri indovinati e di quanti sono
 	console.log('Hai indovinato ' + numeriGiusti.length + ' numeri. Eccoli ' + numeriGiusti);
-}, 30000);
-
-
-/* FUNZIONI */
-// funzione random
-function numRandom(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// funzione check se un N è presente in un array (true = presente)
-function checkArr(arr, num) {
-	for (let i = 0; i < arr.length; i++) {
-		if (num == arr[i]) {
-			return true;
-		}
-	}
-	return false;
-}
-
-/* FUNZIONI */
-
-
-// funzione random
-function numRandom(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// funzione check se un N è presente in un array (true = presente)
-function checkArr(arr, num) {
-	for (let i = 0; i < arr.length; i++) {
-		if (num == arr[i]) {
-			return true;
-		}
-	}
-	return false;
 }
